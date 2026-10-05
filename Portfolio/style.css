@@ -1,0 +1,131 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.6;
+  color: #1a365d;
+  background: #ffffff;
+}
+
+.site-header,
+main,
+.site-footer {
+  width: min(42rem, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.site-header {
+  padding: 3rem 0 1.5rem;
+  border-bottom: 2px solid #c9a227;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c9a227;
+}
+
+h1 {
+  margin: 0 0 0.4rem;
+  font-size: 2.4rem;
+  line-height: 1.15;
+  color: #0a2540;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #2c5282;
+}
+.dark-mode {
+    background-color: #222;
+    color: white;
+}
+
+main {
+  padding: 2rem 0 3rem;
+}
+
+section {
+  margin-bottom: 2.25rem;
+}
+
+h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  color: #1b365d;
+}
+
+.about p {
+  margin: 0 0 0.9rem;
+}
+
+.about p:last-child {
+  margin-bottom: 0;
+}
+
+.skills ul,
+.projects ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.skills li {
+  margin-bottom: 0.35rem;
+}
+
+.projects li {
+  margin-bottom: 1.1rem;
+}
+
+a {
+  display: inline-block;
+  color: #1b4d89;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  transform: scale(1.02);
+}
+
+.projects a {
+  color: #1b4d89;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.projects a:hover,
+.projects a:focus {
+  color: #c9a227;
+}
+
+.projects p {
+  margin: 0.3rem 0 0;
+}
+
+.site-footer {
+  padding: 1.25rem 0 2.5rem;
+  border-top: 1px solid #c9a227;
+  color: #2c5282;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.9rem;
+  }
+}
