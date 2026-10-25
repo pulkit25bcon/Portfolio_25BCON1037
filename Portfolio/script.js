@@ -31,23 +31,31 @@ async function getWeather() {
     const apiKey = "80cbe9053ad7b33527a02c5405abaddc";
 
     const url =
-  `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
+        encodeURIComponent(city) +
+        "&appid=" + apiKey +
+        "&units=metric";
 
     try {
 
         const response = await fetch(url);
 
+        if (response.status === 404) {
+            weatherResult.textContent =
+                "City not found. Check the spelling and try again.";
+            return;
+        }
+
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
+            throw new Error("HTTP " + response.status);
         }
 
         const data = await response.json();
 
-        weatherResult.innerHTML = `
-            <h3>${data.name}</h3>
-            <p>Temperature: ${data.main.temp}°C</p>
-            <p>Condition: ${data.weather[0].description}</p>
-        `;
+        weatherResult.innerHTML =
+            "<h3>" + data.name + "</h3>" +
+            "<p>Temperature: " + data.main.temp + "°C</p>" +
+            "<p>Condition: " + data.weather[0].description + "</p>";
 
     } catch (error) {
 
@@ -57,3 +65,40 @@ async function getWeather() {
         console.error(error);
     }
 }
+
+weatherButton.addEventListener("click", getWeather);
+
+cityInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        getWeather();
+    }
+});
+
+const projectSearch = document.getElementById("projectSearch");
+const projectCards = document.querySelectorAll(".project-card");
+const projectSearchEmpty = document.getElementById("projectSearchEmpty");
+
+function filterProjects() {
+    const query = projectSearch.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    projectCards.forEach(function (card) {
+        const title = card.querySelector(".project-title").textContent.toLowerCase();
+        const description = card.querySelector(".project-description").textContent.toLowerCase();
+        const technologies = (card.dataset.technologies || "").toLowerCase();
+        const matches =
+            !query ||
+            title.includes(query) ||
+            description.includes(query) ||
+            technologies.includes(query);
+
+        card.hidden = !matches;
+        if (matches) {
+            visibleCount += 1;
+        }
+    });
+
+    projectSearchEmpty.hidden = visibleCount > 0;
+}
+
+projectSearch.addEventListener("input", filterProjects);
