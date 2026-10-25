@@ -5,10 +5,10 @@
   window.__portfolioChatInitialized = true;
 
   const form = document.getElementById("chatForm");
-  const input = document.getElementById("chatInput");
+  const input = document.getElementById("userInput");
   const messages = document.getElementById("chatMessages");
   const statusText = document.getElementById("chatStatus");
-  const sendButton = document.getElementById("chatSend");
+  const sendButton = document.getElementById("sendButton");
 
   if (!form || !input || !messages || !statusText || !sendButton) {
     console.error("Chatbot initialization failed: required HTML elements are missing.");
@@ -20,7 +20,8 @@
 
   function showMessage(text, kind) {
     const p = document.createElement("p");
-    p.className = kind === "user" ? "user-message" : "bot-message";
+    p.className =
+      kind === "user" ? "chat-message chat-user" : "chat-message chat-assistant";
     p.textContent = text;
     messages.appendChild(p);
     messages.scrollTop = messages.scrollHeight;
@@ -109,7 +110,14 @@
         }),
       });
 
-      const data = await response.json();
+      let data = {};
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error(
+          "Chat API is not available. Use the classroom demo server, or try a greeting like “hi”."
+        );
+      }
 
       if (!response.ok) {
         throw new Error(

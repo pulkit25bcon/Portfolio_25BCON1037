@@ -172,17 +172,18 @@
     aria-live="polite"
   ></div>
 
-  <div class="chat-controls">
+  <form id="chatForm" class="chat-controls">
     <input
       type="text"
       id="userInput"
       placeholder="Ask a question..."
+      autocomplete="off"
     />
 
-    <button id="sendButton" type="button">
+    <button id="sendButton" type="submit">
       Send
     </button>
-  </div>
+  </form>
 
   <p id="chatStatus" role="status"></p>
 
@@ -205,7 +206,6 @@
         <span class="contact-label">GitHub</span>
         <a href="https://github.com/pulkit25bcon" target="_blank" rel="noopener noreferrer">pulkit25bcon</a>
       </li>
-      </li>
     </ul>
   </section>
 
@@ -214,7 +214,6 @@
   </footer>
   <button id="themeToggle">Switch to Dark Mode</button>
   <script src="script.js"></script>
-  <script src="config.js"></script>
   <script src="chatbot.js"></script>
 </body>
 </html>
